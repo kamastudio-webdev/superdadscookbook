@@ -5,6 +5,7 @@ category: Dessert
 prepMinutes: 20
 cookMinutes: 30
 servings: about 40 cookies
+featured: true
 date: 2026-11-06
 tags: [baking, double-batch, freezer-friendly]
 adaptedFrom:

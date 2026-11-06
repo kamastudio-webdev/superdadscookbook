@@ -10,7 +10,6 @@ image: https://images.unsplash.com/photo-1689773976415-293dd893f77e
 imageAlt: Chicken fajitas with peppers, onions, tortillas, cheese, limes and salsa on a wooden table
 photoCredit: Thomas Park
 photoCreditUrl: https://unsplash.com/@thomascpark
-featured: true
 tags: [weeknight, one-pan, kid-friendly]
 ingredients:
   - 1½ pounds boneless, skinless chicken breasts

@@ -111,9 +111,10 @@ const breadcrumbs = {
       <h1>{d.title}</h1>
       <p class="recipe-lede">{d.description}</p>
 
-      <dl class="stat-strip">
+      <dl class={d.restMinutes ? "stat-strip has-rest" : "stat-strip"}>
         <div><dt>Prep</dt><dd>{formatMinutes(d.prepMinutes)}</dd></div>
         <div><dt>Cook</dt><dd>{formatMinutes(d.cookMinutes)}</dd></div>
+        {d.restMinutes > 0 && <div><dt>{d.restLabel}</dt><dd>{formatMinutes(d.restMinutes)}</dd></div>}
         <div><dt>Total</dt><dd>{formatMinutes(total)}</dd></div>
         <div><dt>Makes</dt><dd>{d.servings}</dd></div>
       </dl>

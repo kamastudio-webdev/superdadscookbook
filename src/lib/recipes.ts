@@ -13,7 +13,7 @@ export async function getRecipes(): Promise<Recipe[]> {
 }
 
 export function totalMinutes(r: Recipe): number {
-  return r.data.prepMinutes + r.data.cookMinutes;
+  return r.data.prepMinutes + r.data.cookMinutes + r.data.restMinutes;
 }
 
 /** 45 -> "45 min", 380 -> "6 hr 20 min" */

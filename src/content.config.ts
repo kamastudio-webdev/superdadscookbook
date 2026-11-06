@@ -19,6 +19,9 @@ const recipes = defineCollection({
     category: z.enum(CATEGORIES),
     prepMinutes: z.number().int().nonnegative(),
     cookMinutes: z.number().int().nonnegative(),
+    /** Hands-off waiting time (rising, chilling). Counts toward the total. */
+    restMinutes: z.number().int().nonnegative().default(0),
+    restLabel: z.string().default('Rest'),
     servings: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),

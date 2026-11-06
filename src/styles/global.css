@@ -692,6 +692,11 @@ main {
   max-width: 46rem;
 }
 
+.stat-strip.has-rest {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 56rem;
+}
+
 .stat-strip div {
   padding: 0.8rem 1rem;
   border-left: 2px solid var(--ink);
@@ -948,12 +953,17 @@ main {
     margin-left: -0.8rem;
   }
 
-  .stat-strip {
+  .stat-strip,
+  .stat-strip.has-rest {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .stat-strip div:nth-child(3) {
+  .stat-strip div:nth-child(odd) {
     border-left: 0;
+  }
+
+  .stat-strip div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .stat-strip div:nth-child(n + 3) {
