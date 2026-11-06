@@ -223,6 +223,18 @@ main {
   color: #b9c0e8;
 }
 
+.site-footer .small {
+  margin-bottom: 0.35rem;
+}
+
+.credit a {
+  color: var(--mustard);
+}
+
+.credit a:hover {
+  color: #ffffff;
+}
+
 /* ---------- Buttons ---------- */
 
 .button {
