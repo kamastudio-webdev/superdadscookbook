@@ -1,6 +1,6 @@
 ---
 import { CATEGORY_COLORS } from '../lib/categories';
-import { formatMinutes, recipePath, totalMinutes, type Recipe } from '../lib/recipes';
+import { formatMinutes, photo, photoSrcset, recipePath, totalMinutes, type Recipe } from '../lib/recipes';
 
 interface Props {
   recipe: Recipe;
@@ -13,7 +13,21 @@ const Heading = `h${level}` as 'h2' | 'h3';
 ---
 
 <article class="card" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
-  {d.image && <img class="card-photo" src={d.image} alt={d.imageAlt ?? ''} loading="lazy" decoding="async" />}
+  {
+    d.image && (
+      <img
+        class="card-photo"
+        src={photo(d.image, 640, 480)}
+        srcset={photoSrcset(d.image, 4 / 3, [400, 640, 960])}
+        sizes="(max-width: 700px) 100vw, 360px"
+        width="640"
+        height="480"
+        alt={d.imageAlt ?? ''}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
   <div class="card-body">
     <Heading class="card-title"><a href={recipePath(recipe)}>{d.title}</a></Heading>
     <p class="card-desc">{d.description}</p>

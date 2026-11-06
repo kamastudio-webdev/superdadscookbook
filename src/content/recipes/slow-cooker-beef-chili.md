@@ -6,6 +6,10 @@ prepMinutes: 20
 cookMinutes: 360
 servings: 8 servings
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1658308766948-01c85ade2737
+imageAlt: A bowl of bean chili topped with avocado
+photoCredit: Svitlana
+photoCreditUrl: https://unsplash.com/@kekse_und_ich
 tags: [slow-cooker, make-ahead, freezer-friendly]
 ingredients:
   - 2 pounds lean ground beef

@@ -73,6 +73,48 @@ export function flatIngredients(list: IngredientList): string[] {
   return list.flatMap((item) => (typeof item === 'string' ? [item] : item.items));
 }
 
+const UNSPLASH = 'https://images.unsplash.com/';
+
+/**
+ * A sized copy of a recipe photo. Unsplash photos are resized and cropped by Unsplash's own
+ * image service (and must be loaded from there under their rules); local photos are used as-is.
+ */
+export function photo(src: string, width: number, height: number): string {
+  if (!src.startsWith(UNSPLASH)) return src;
+  const base = src.split('?')[0];
+  return `${base}?ixlib=rb-4.1.0&auto=format&fit=crop&crop=entropy&w=${width}&h=${height}&q=75`;
+}
+
+/** srcset for a photo at a fixed aspect ratio, e.g. 4/3 */
+export function photoSrcset(src: string, ratio: number, widths: number[]): string | undefined {
+  if (!src.startsWith(UNSPLASH)) return undefined;
+  return widths.map((w) => `${photo(src, w, Math.round(w / ratio))} ${w}w`).join(', ');
+}
+
+/** Absolute photo address for Google and link previews. */
+export function absolutePhoto(src: string, site: URL | undefined, width: number, height: number): string {
+  return new URL(photo(src, width, height), site).href;
+}
+
+const UTM = 'utm_source=superdadscookbook&utm_medium=referral';
+
+/** Photographer link with the referral tag Unsplash asks for. */
+export function creditLink(url: string): string {
+  if (!url.includes('unsplash.com')) return url;
+  return `${url}${url.includes('?') ? '&' : '?'}${UTM}`;
+}
+
+export const UNSPLASH_HOME = `https://unsplash.com/?${UTM}`;
+
+/** Servings as a plain number for Google: "4 servings" -> 4, "about 4 dozen cookies" -> 48. */
+export function servingsNumber(r: Recipe): number | undefined {
+  if (r.data.servingsCount) return r.data.servingsCount;
+  const match = r.data.servings.match(/\d+/);
+  if (!match) return undefined;
+  const n = Number(match[0]);
+  return /dozen/i.test(r.data.servings) ? n * 12 : n;
+}
+
 /** Text the recipe search box matches against. */
 export function searchText(r: Recipe): string {
   const d = r.data;

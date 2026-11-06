@@ -6,6 +6,10 @@ prepMinutes: 5
 cookMinutes: 15
 servings: 4 servings
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1752095809237-1fe8b70995a2
+imageAlt: Creamy mac and cheese on a white plate
+photoCredit: Giorgio Trovato
+photoCreditUrl: https://unsplash.com/@giorgiotrovato
 tags: [weeknight, one-pot, kid-friendly, vegetarian]
 ingredients:
   - 2 cups whole milk

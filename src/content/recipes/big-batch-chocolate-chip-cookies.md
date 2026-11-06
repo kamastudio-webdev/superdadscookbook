@@ -6,6 +6,10 @@ prepMinutes: 15
 cookMinutes: 30
 servings: about 4 dozen cookies
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1584847801423-852691e41bc7
+imageAlt: Chocolate chip cookies cooling on a wire rack
+photoCredit: Joshua Bedford
+photoCreditUrl: https://unsplash.com/@joshuabedford
 tags: [baking, kid-friendly, freezer-friendly]
 ingredients:
   - 2¼ cups all-purpose flour

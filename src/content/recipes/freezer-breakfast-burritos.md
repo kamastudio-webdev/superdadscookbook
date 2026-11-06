@@ -6,6 +6,10 @@ prepMinutes: 20
 cookMinutes: 25
 servings: 10 burritos
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1626026671041-ee71c3bbf735
+imageAlt: A grilled breakfast burrito on a plate
+photoCredit: Mikey Frost
+photoCreditUrl: https://unsplash.com/@frostyfilmsandphoto
 tags: [make-ahead, freezer-friendly]
 ingredients:
   - 1 pound breakfast sausage

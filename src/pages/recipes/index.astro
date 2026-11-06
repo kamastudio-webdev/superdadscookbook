@@ -2,16 +2,28 @@
 import Base from '../../layouts/Base.astro';
 import MealLinks from '../../components/MealLinks.astro';
 import RecipeGrid from '../../components/RecipeGrid.astro';
-import { categoriesInUse, getRecipes } from '../../lib/recipes';
+import { categoriesInUse, getRecipes, recipePath } from '../../lib/recipes';
 
 const recipes = await getRecipes();
 const meals = categoriesInUse(recipes);
+
+// Tells Google this page lists every recipe on the site (used for recipe carousels).
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: recipes.map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: new URL(recipePath(r), Astro.site).href,
+  })),
+};
 ---
 
 <Base
   title="All recipes"
   description="Every recipe in Super Dad’s Cookbook, from quick weeknight dinners to make-ahead breakfasts and desserts."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemList)} />
   <div class="wrap">
     <header class="page-head">
       <h1>All recipes</h1>

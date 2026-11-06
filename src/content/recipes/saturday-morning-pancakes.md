@@ -6,6 +6,10 @@ prepMinutes: 10
 cookMinutes: 15
 servings: 4 servings (about 14 pancakes)
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1650134973809-d8c3a2da59ba
+imageAlt: A stack of pancakes topped with blueberries and syrup
+photoCredit: Amber Fisher
+photoCreditUrl: https://unsplash.com/@lindsaysworld
 tags: [weekend, kid-friendly, vegetarian]
 ingredients:
   - 2 cups all-purpose flour

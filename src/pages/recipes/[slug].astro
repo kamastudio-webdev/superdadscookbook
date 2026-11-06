@@ -4,13 +4,20 @@ import Base from '../../layouts/Base.astro';
 import RecipeGrid from '../../components/RecipeGrid.astro';
 import { CATEGORY_COLORS } from '../../lib/categories';
 import {
+  absolutePhoto,
   categoryPath,
+  creditLink,
   flatIngredients,
   formatMinutes,
   getRecipes,
   groupIngredients,
   isoDuration,
+  photo,
+  photoSrcset,
+  recipePath,
+  servingsNumber,
   totalMinutes,
+  UNSPLASH_HOME,
   type Recipe,
 } from '../../lib/recipes';
 
@@ -37,8 +44,12 @@ const { Content } = await render(recipe);
 const hasStory = Boolean(recipe.body?.trim());
 const total = totalMinutes(recipe);
 const url = new URL(Astro.url.pathname, Astro.site);
+const site = Astro.site;
+const servings = servingsNumber(recipe);
+const isUnsplash = d.image?.startsWith('https://images.unsplash.com/') ?? false;
 
 // Structured data so Google can show this as a recipe result.
+// Google asks for the photo in square, 4:3 and 16:9 shapes.
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Recipe',
@@ -47,9 +58,17 @@ const schema = {
   url: url.href,
   datePublished: d.date.toISOString().slice(0, 10),
   author: { '@type': 'Organization', name: 'Super Dad’s Cookbook' },
-  ...(d.image ? { image: [new URL(d.image, Astro.site).href] } : {}),
+  ...(d.image
+    ? {
+        image: [
+          absolutePhoto(d.image, site, 1200, 1200),
+          absolutePhoto(d.image, site, 1200, 900),
+          absolutePhoto(d.image, site, 1200, 675),
+        ],
+      }
+    : {}),
   recipeCategory: d.category,
-  recipeYield: d.servings,
+  recipeYield: servings ? [String(servings), d.servings] : d.servings,
   prepTime: isoDuration(d.prepMinutes),
   cookTime: isoDuration(d.cookMinutes),
   totalTime: isoDuration(total),
@@ -57,10 +76,27 @@ const schema = {
   recipeIngredient: flatIngredients(d.ingredients),
   recipeInstructions: d.steps.map((text) => ({ '@type': 'HowToStep', text })),
 };
+
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Recipes', item: new URL('/recipes/', site).href },
+    { '@type': 'ListItem', position: 2, name: d.category, item: new URL(categoryPath(d.category), site).href },
+    { '@type': 'ListItem', position: 3, name: d.title, item: new URL(recipePath(recipe), site).href },
+  ],
+};
 ---
 
-<Base title={d.title} description={d.description} ogType="article">
+<Base
+  title={d.title}
+  description={d.description}
+  ogType="article"
+  image={d.image ? absolutePhoto(d.image, site, 1200, 630) : undefined}
+  imageAlt={d.imageAlt}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbs)} />
 
   <article class="wrap" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -90,7 +126,34 @@ const schema = {
       </div>
     </header>
 
-    {d.image && <img class="recipe-photo" src={d.image} alt={d.imageAlt ?? ''} />}
+    {
+      d.image && (
+        <figure class="recipe-figure">
+          <img
+            class="recipe-photo"
+            src={photo(d.image, 1600, 800)}
+            srcset={photoSrcset(d.image, 2, [800, 1200, 1600, 2200])}
+            sizes="(max-width: 1200px) 100vw, 1150px"
+            width="1600"
+            height="800"
+            alt={d.imageAlt ?? ''}
+            fetchpriority="high"
+          />
+          {d.photoCredit && (
+            <figcaption>
+              Photo by{' '}
+              {d.photoCreditUrl ? <a href={creditLink(d.photoCreditUrl)}>{d.photoCredit}</a> : d.photoCredit}
+              {isUnsplash && (
+                <>
+                  {' '}
+                  on <a href={UNSPLASH_HOME}>Unsplash</a>
+                </>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )
+    }
 
     {
       hasStory && (

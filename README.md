@@ -49,7 +49,16 @@ image: /images/grilled-cheese.jpg
 imageAlt: Golden grilled cheese sandwich cut in half
 ```
 
-Landscape photos around 1600 pixels wide work best.
+Landscape photos around 1600 pixels wide or bigger work best. Google needs a photo before it will show a recipe with a picture in search results.
+
+The starter recipes use free Unsplash photos. Those show a credit line under the photo, set with:
+
+```yaml
+photoCredit: Thomas Park
+photoCreditUrl: https://unsplash.com/@thomascpark
+```
+
+When you swap in your own photo, delete those two lines.
 
 ## Work on the site on your own computer (optional)
 

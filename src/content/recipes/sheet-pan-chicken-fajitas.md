@@ -6,6 +6,10 @@ prepMinutes: 15
 cookMinutes: 25
 servings: 4 servings
 date: 2026-11-06
+image: https://images.unsplash.com/photo-1689773976415-293dd893f77e
+imageAlt: Chicken fajitas with peppers, onions, tortillas, cheese, limes and salsa on a wooden table
+photoCredit: Thomas Park
+photoCreditUrl: https://unsplash.com/@thomascpark
 featured: true
 tags: [weeknight, one-pan, kid-friendly]
 ingredients:

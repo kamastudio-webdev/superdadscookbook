@@ -2,15 +2,31 @@
 import Base from '../layouts/Base.astro';
 import MealLinks from '../components/MealLinks.astro';
 import RecipeGrid from '../components/RecipeGrid.astro';
-import { categoriesInUse, formatMinutes, getRecipes, recipePath, totalMinutes } from '../lib/recipes';
+import {
+  categoriesInUse,
+  formatMinutes,
+  getRecipes,
+  photo,
+  photoSrcset,
+  recipePath,
+  totalMinutes,
+} from '../lib/recipes';
 
 const recipes = await getRecipes();
 const pick = recipes.find((r) => r.data.featured) ?? recipes[0];
 const newest = recipes.filter((r) => r !== pick).slice(0, 6);
 const meals = categoriesInUse(recipes);
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Super Dad’s Cookbook',
+  url: new URL('/', Astro.site).href,
+};
 ---
 
 <Base>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(website)} />
   <div class="wrap">
     <section class="hero" aria-labelledby="site-title">
       <div class="hero-copy">
@@ -28,6 +44,18 @@ const meals = categoriesInUse(recipes);
         pick && (
           <aside class="pick" aria-labelledby="pick-heading">
             <div class="pick-panel">
+              {pick.data.image && (
+                <img
+                  class="pick-photo"
+                  src={photo(pick.data.image, 720, 405)}
+                  srcset={photoSrcset(pick.data.image, 16 / 9, [480, 720, 1080])}
+                  sizes="(max-width: 860px) 100vw, 480px"
+                  width="720"
+                  height="405"
+                  alt=""
+                  fetchpriority="high"
+                />
+              )}
               <h2 id="pick-heading">Try this one tonight</h2>
               <p class="pick-title">
                 <a href={recipePath(pick)}>{pick.data.title}</a>
