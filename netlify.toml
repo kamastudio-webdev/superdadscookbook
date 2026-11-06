@@ -13,7 +13,19 @@
   force = true
 
 [[redirects]]
+  from = "http://superdadcookbook.com/*"
+  to = "https://superdadscookbook.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://www.superdadcookbook.com/*"
+  to = "https://superdadscookbook.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.superdadcookbook.com/*"
   to = "https://superdadscookbook.com/:splat"
   status = 301
   force = true
