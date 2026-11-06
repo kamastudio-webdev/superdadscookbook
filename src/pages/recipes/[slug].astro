@@ -1,0 +1,225 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import RecipeGrid from '../../components/RecipeGrid.astro';
+import { CATEGORY_COLORS } from '../../lib/categories';
+import {
+  categoryPath,
+  flatIngredients,
+  formatMinutes,
+  getRecipes,
+  groupIngredients,
+  isoDuration,
+  totalMinutes,
+  type Recipe,
+} from '../../lib/recipes';
+
+export async function getStaticPaths() {
+  const recipes = await getRecipes();
+  return recipes.map((recipe) => {
+    const sameMeal = recipes.filter((o) => o.id !== recipe.id && o.data.category === recipe.data.category);
+    const others = recipes.filter((o) => o.id !== recipe.id && o.data.category !== recipe.data.category);
+    return {
+      params: { slug: recipe.id },
+      props: { recipe, related: [...sameMeal, ...others].slice(0, 3) },
+    };
+  });
+}
+
+interface Props {
+  recipe: Recipe;
+  related: Recipe[];
+}
+
+const { recipe, related } = Astro.props;
+const d = recipe.data;
+const { Content } = await render(recipe);
+const hasStory = Boolean(recipe.body?.trim());
+const total = totalMinutes(recipe);
+const url = new URL(Astro.url.pathname, Astro.site);
+
+// Structured data so Google can show this as a recipe result.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Recipe',
+  name: d.title,
+  description: d.description,
+  url: url.href,
+  datePublished: d.date.toISOString().slice(0, 10),
+  author: { '@type': 'Organization', name: 'Super Dad’s Cookbook' },
+  ...(d.image ? { image: [new URL(d.image, Astro.site).href] } : {}),
+  recipeCategory: d.category,
+  recipeYield: d.servings,
+  prepTime: isoDuration(d.prepMinutes),
+  cookTime: isoDuration(d.cookMinutes),
+  totalTime: isoDuration(total),
+  keywords: d.tags.join(', '),
+  recipeIngredient: flatIngredients(d.ingredients),
+  recipeInstructions: d.steps.map((text) => ({ '@type': 'HowToStep', text })),
+};
+---
+
+<Base title={d.title} description={d.description} ogType="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+
+  <article class="wrap" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/recipes/">Recipes</a></li>
+        <li><a href={categoryPath(d.category)}>{d.category}</a></li>
+      </ol>
+    </nav>
+
+    <header class="recipe-head">
+      <h1>{d.title}</h1>
+      <p class="recipe-lede">{d.description}</p>
+
+      <dl class="stat-strip">
+        <div><dt>Prep</dt><dd>{formatMinutes(d.prepMinutes)}</dd></div>
+        <div><dt>Cook</dt><dd>{formatMinutes(d.cookMinutes)}</dd></div>
+        <div><dt>Total</dt><dd>{formatMinutes(total)}</dd></div>
+        <div><dt>Makes</dt><dd>{d.servings}</dd></div>
+      </dl>
+
+      <div class="recipe-tools">
+        <button class="button" type="button" data-print>Print recipe</button>
+        <button class="button secondary" type="button" data-wake aria-pressed="false" hidden>
+          Keep screen on while cooking
+        </button>
+        <p class="tool-note" data-wake-note hidden>Your screen will stay on while this page is open.</p>
+      </div>
+    </header>
+
+    {d.image && <img class="recipe-photo" src={d.image} alt={d.imageAlt ?? ''} />}
+
+    {
+      hasStory && (
+        <div class="recipe-story prose">
+          <Content />
+        </div>
+      )
+    }
+
+    <div class="recipe-layout">
+      <section class="ingredients" aria-labelledby="ingredients-heading">
+        <h2 id="ingredients-heading">Ingredients</h2>
+        {
+          groupIngredients(d.ingredients).map((group) => (
+            <>
+              {group.section && <h3>{group.section}</h3>}
+              <ul class="check-list">
+                {group.items.map((line) => (
+                  <li>
+                    <label>
+                      <input type="checkbox" />
+                      <span>{line}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))
+        }
+        <p class="list-hint">Tap an ingredient to cross it off as you go.</p>
+      </section>
+
+      <div>
+        <section class="steps" aria-labelledby="steps-heading">
+          <h2 id="steps-heading">Steps</h2>
+          <ol class="step-list">
+            {
+              d.steps.map((step) => (
+                <li>
+                  <p>{step}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
+
+        {
+          d.tips.length > 0 && (
+            <section class="tips" aria-labelledby="tips-heading">
+              <h2 id="tips-heading">Dad’s tips</h2>
+              <ul>
+                {d.tips.map((tip) => (
+                  <li>{tip}</li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        {
+          d.tags.length > 0 && (
+            <ul class="tags" aria-label="Tags">
+              {d.tags.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="wrap section related" aria-labelledby="related-heading">
+        <div class="section-head">
+          <h2 id="related-heading">Cook this next</h2>
+        </div>
+        <RecipeGrid recipes={related} />
+      </section>
+    )
+  }
+</Base>
+
+<script>
+  // Print button
+  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+
+  // "Keep screen on" uses the browser's Screen Wake Lock, where it's supported.
+  const wakeButton = document.querySelector<HTMLButtonElement>('[data-wake]');
+  const wakeNote = document.querySelector<HTMLElement>('[data-wake-note]');
+
+  if (wakeButton && 'wakeLock' in navigator) {
+    let lock: WakeLockSentinel | null = null;
+    let wanted = false;
+
+    const show = () => {
+      wakeButton.setAttribute('aria-pressed', String(wanted));
+      wakeButton.textContent = wanted ? 'Screen is staying on' : 'Keep screen on while cooking';
+      if (wakeNote) wakeNote.hidden = !wanted;
+    };
+
+    const acquire = async () => {
+      try {
+        lock = await navigator.wakeLock.request('screen');
+        lock.addEventListener('release', () => {
+          lock = null;
+        });
+      } catch {
+        wanted = false;
+        show();
+      }
+    };
+
+    wakeButton.hidden = false;
+    wakeButton.addEventListener('click', async () => {
+      wanted = !wanted;
+      if (wanted) {
+        await acquire();
+      } else if (lock) {
+        await lock.release();
+        lock = null;
+      }
+      show();
+    });
+
+    // The browser drops the lock when you switch tabs; take it back when you return.
+    document.addEventListener('visibilitychange', () => {
+      if (wanted && !lock && document.visibilityState === 'visible') acquire();
+    });
+  }
+</script>

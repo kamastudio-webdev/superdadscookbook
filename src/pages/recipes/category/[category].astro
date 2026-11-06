@@ -1,0 +1,46 @@
+---
+import Base from '../../../layouts/Base.astro';
+import MealLinks from '../../../components/MealLinks.astro';
+import RecipeGrid from '../../../components/RecipeGrid.astro';
+import { categoriesInUse, getRecipes, slugify, type Recipe } from '../../../lib/recipes';
+import type { Category } from '../../../lib/categories';
+
+export async function getStaticPaths() {
+  const recipes = await getRecipes();
+  const meals = categoriesInUse(recipes);
+  return meals.map((m) => ({
+    params: { category: slugify(m.name) },
+    props: {
+      name: m.name,
+      list: recipes.filter((r) => r.data.category === m.name),
+      meals,
+      total: recipes.length,
+    },
+  }));
+}
+
+interface Props {
+  name: Category;
+  list: Recipe[];
+  meals: { name: Category; count: number }[];
+  total: number;
+}
+
+const { name, list, meals, total } = Astro.props;
+const plural = list.length === 1 ? 'recipe' : 'recipes';
+---
+
+<Base title={`${name} recipes`} description={`${list.length} ${name.toLowerCase()} ${plural} from Super Dad’s Cookbook.`}>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>{name} recipes</h1>
+      <p>{list.length} {plural}</p>
+    </header>
+
+    <MealLinks meals={meals} total={total} current={name} />
+
+    <div class="section">
+      <RecipeGrid recipes={list} level={2} />
+    </div>
+  </div>
+</Base>

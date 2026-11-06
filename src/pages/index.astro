@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import MealLinks from '../components/MealLinks.astro';
+import RecipeGrid from '../components/RecipeGrid.astro';
+import { categoriesInUse, formatMinutes, getRecipes, recipePath, totalMinutes } from '../lib/recipes';
+
+const recipes = await getRecipes();
+const pick = recipes.find((r) => r.data.featured) ?? recipes[0];
+const newest = recipes.filter((r) => r !== pick).slice(0, 6);
+const meals = categoriesInUse(recipes);
+---
+
+<Base>
+  <div class="wrap">
+    <section class="hero" aria-labelledby="site-title">
+      <div class="hero-copy">
+        <h1 class="wordmark" id="site-title"><span>Super Dad’s</span> <span>Cookbook</span></h1>
+        <p class="hero-lede">
+          Weeknight dinners, weekend pancakes and make-ahead breakfasts, written so anyone in the house can cook them.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="/recipes/">Browse all recipes</a>
+          <a class="button secondary" href="/about/">About this cookbook</a>
+        </div>
+      </div>
+
+      {
+        pick && (
+          <aside class="pick" aria-labelledby="pick-heading">
+            <div class="pick-panel">
+              <h2 id="pick-heading">Try this one tonight</h2>
+              <p class="pick-title">
+                <a href={recipePath(pick)}>{pick.data.title}</a>
+              </p>
+              <p>{pick.data.description}</p>
+              <dl class="facts">
+                <div><dt>Time</dt><dd>{formatMinutes(totalMinutes(pick))}</dd></div>
+                <div><dt>Makes</dt><dd>{pick.data.servings}</dd></div>
+              </dl>
+            </div>
+          </aside>
+        )
+      }
+    </section>
+
+    <section class="section" aria-labelledby="meals-heading">
+      <div class="section-head">
+        <h2 id="meals-heading">Cook by meal</h2>
+      </div>
+      <MealLinks meals={meals} />
+    </section>
+
+    <section class="section" aria-labelledby="newest-heading">
+      <div class="section-head">
+        <h2 id="newest-heading">Newest recipes</h2>
+        <a href="/recipes/">See all {recipes.length} recipes</a>
+      </div>
+      <RecipeGrid recipes={newest} />
+    </section>
+  </div>
+</Base>

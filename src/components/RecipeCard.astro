@@ -1,0 +1,26 @@
+---
+import { CATEGORY_COLORS } from '../lib/categories';
+import { formatMinutes, recipePath, totalMinutes, type Recipe } from '../lib/recipes';
+
+interface Props {
+  recipe: Recipe;
+  level?: 2 | 3;
+}
+
+const { recipe, level = 3 } = Astro.props;
+const d = recipe.data;
+const Heading = `h${level}` as 'h2' | 'h3';
+---
+
+<article class="card" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
+  {d.image && <img class="card-photo" src={d.image} alt={d.imageAlt ?? ''} loading="lazy" decoding="async" />}
+  <div class="card-body">
+    <Heading class="card-title"><a href={recipePath(recipe)}>{d.title}</a></Heading>
+    <p class="card-desc">{d.description}</p>
+    <dl class="facts">
+      <div><dt>Meal</dt><dd>{d.category}</dd></div>
+      <div><dt>Time</dt><dd>{formatMinutes(totalMinutes(recipe))}</dd></div>
+      <div><dt>Makes</dt><dd>{d.servings}</dd></div>
+    </dl>
+  </div>
+</article>

@@ -1,0 +1,40 @@
+---
+import { CATEGORY_COLORS, type Category } from '../lib/categories';
+import { categoryPath } from '../lib/recipes';
+
+interface Props {
+  meals: { name: Category; count: number }[];
+  total?: number;
+  current?: string; // 'all', a meal name, or nothing
+  label?: string;
+}
+
+const { meals, total, current, label = 'Browse by meal' } = Astro.props;
+---
+
+<nav aria-label={label}>
+  <ul class="meals">
+    {
+      typeof total === 'number' && (
+        <li>
+          <a href="/recipes/" aria-current={current === 'all' ? 'page' : undefined} style="--meal-color: var(--sky)">
+            All recipes <span class="count">{total}</span>
+          </a>
+        </li>
+      )
+    }
+    {
+      meals.map((m) => (
+        <li>
+          <a
+            href={categoryPath(m.name)}
+            aria-current={current === m.name ? 'page' : undefined}
+            style={`--meal-color: ${CATEGORY_COLORS[m.name]}`}
+          >
+            {m.name} <span class="count">{m.count}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

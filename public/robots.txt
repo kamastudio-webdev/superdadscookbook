@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://superdadscookbook.com/sitemap-index.xml

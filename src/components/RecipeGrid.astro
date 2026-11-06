@@ -1,0 +1,22 @@
+---
+import RecipeCard from './RecipeCard.astro';
+import { searchText, type Recipe } from '../lib/recipes';
+
+interface Props {
+  recipes: Recipe[];
+  level?: 2 | 3;
+  searchable?: boolean;
+}
+
+const { recipes, level = 3, searchable = false } = Astro.props;
+---
+
+<ul class="card-grid" data-recipe-grid>
+  {
+    recipes.map((r) => (
+      <li data-search={searchable ? searchText(r) : undefined}>
+        <RecipeCard recipe={r} level={level} />
+      </li>
+    ))
+  }
+</ul>

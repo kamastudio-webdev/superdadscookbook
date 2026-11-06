@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import MealLinks from '../../components/MealLinks.astro';
+import RecipeGrid from '../../components/RecipeGrid.astro';
+import { categoriesInUse, getRecipes } from '../../lib/recipes';
+
+const recipes = await getRecipes();
+const meals = categoriesInUse(recipes);
+---
+
+<Base
+  title="All recipes"
+  description="Every recipe in Super Dad’s Cookbook, from quick weeknight dinners to make-ahead breakfasts and desserts."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>All recipes</h1>
+      <p>Search by name or ingredient, or pick a meal.</p>
+    </header>
+
+    <MealLinks meals={meals} total={recipes.length} current="all" />
+
+    <div class="search">
+      <label for="recipe-search">Search recipes</label>
+      <input id="recipe-search" type="search" placeholder="Try “chicken” or “eggs”" autocomplete="off" />
+    </div>
+    <p class="result-count" id="result-count" aria-live="polite">{recipes.length} recipes</p>
+
+    <RecipeGrid recipes={recipes} level={2} searchable />
+
+    <div class="empty" id="no-results" hidden>
+      <p><strong>No recipes match “<span data-query></span>”.</strong></p>
+      <p>Try a shorter word, an ingredient like “cheese”, or browse by meal above.</p>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#recipe-search');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('[data-search]'));
+  const empty = document.querySelector<HTMLElement>('#no-results');
+  const count = document.querySelector<HTMLElement>('#result-count');
+  const total = items.length;
+
+  input?.addEventListener('input', () => {
+    const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    for (const item of items) {
+      const text = item.dataset.search ?? '';
+      const match = words.every((w) => text.includes(w));
+      item.hidden = !match;
+      if (match) shown++;
+    }
+    if (empty) {
+      empty.hidden = shown !== 0;
+      const q = empty.querySelector('[data-query]');
+      if (q) q.textContent = input.value.trim();
+    }
+    if (count) {
+      count.textContent = words.length ? `${shown} of ${total} recipes` : `${total} recipes`;
+    }
+  });
+</script>

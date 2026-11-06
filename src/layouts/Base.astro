@@ -1,0 +1,78 @@
+---
+import '@fontsource/bowlby-one/400.css';
+import '@fontsource/atkinson-hyperlegible-next/400.css';
+import '@fontsource/atkinson-hyperlegible-next/700.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: string;
+}
+
+const SITE_NAME = 'Super Dad’s Cookbook';
+const {
+  title,
+  description = 'Family recipes that work on a busy weeknight: dinners, breakfasts and treats with clear steps and everyday measurements.',
+  ogType = 'website',
+} = Astro.props;
+
+const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME}: family recipes for busy weeknights`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#2747d8" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title ?? SITE_NAME} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="logo" href="/">{SITE_NAME}</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/recipes/" aria-current={path.startsWith('/recipes') ? 'page' : undefined}>Recipes</a></li>
+            <li><a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-logo">{SITE_NAME}</p>
+          <p>Family recipes written for real kitchens.</p>
+          <p class="small">© {year} {SITE_NAME}</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <ul>
+            <li><a href="/recipes/">All recipes</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
