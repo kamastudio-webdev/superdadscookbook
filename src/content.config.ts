@@ -32,6 +32,8 @@ const recipes = defineCollection({
     // Who took the photo, shown under it. Leave out for your own photos.
     photoCredit: z.string().optional(),
     photoCreditUrl: z.string().url().optional(),
+    // For recipes based on someone else's: shown as "Adapted from <name>" with a link.
+    adaptedFrom: z.object({ name: z.string(), url: z.string().url() }).optional(),
     // Optional: number of servings for Google, if "servings" doesn't start with a number.
     servingsCount: z.number().int().positive().optional(),
     draft: z.boolean().default(false),

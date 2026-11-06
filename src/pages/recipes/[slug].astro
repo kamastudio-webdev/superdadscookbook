@@ -75,6 +75,7 @@ const schema = {
   keywords: d.tags.join(', '),
   recipeIngredient: flatIngredients(d.ingredients),
   recipeInstructions: d.steps.map((text) => ({ '@type': 'HowToStep', text })),
+  ...(d.adaptedFrom ? { isBasedOn: d.adaptedFrom.url } : {}),
 };
 
 const breadcrumbs = {
@@ -210,6 +211,14 @@ const breadcrumbs = {
                 ))}
               </ul>
             </section>
+          )
+        }
+
+        {
+          d.adaptedFrom && (
+            <p class="source">
+              Adapted from <a href={d.adaptedFrom.url}>{d.adaptedFrom.name}</a>.
+            </p>
           )
         }
 

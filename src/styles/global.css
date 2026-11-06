@@ -11,6 +11,7 @@
   --mustard: #f5c330;
   --mustard-pale: #fff3c7;
   --herb: #2f9e6b;
+  --wheat: #c98a2e;
   --sky: #eef2ff;
   --paper: #ffffff;
   --line: #c6cdeb;
@@ -870,6 +871,16 @@ main {
 
 .tips li {
   margin-bottom: 0.6rem;
+}
+
+.source {
+  margin: 1.75rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.source a {
+  color: var(--ink-soft);
 }
 
 .tags {
