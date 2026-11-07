@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "photos": "node scripts/photos.mjs",
+    "prebuild": "node scripts/photos.mjs",
+    "predev": "node scripts/photos.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -15,6 +18,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
     "@fontsource/bowlby-one": "^5.3.0",
-    "astro": "^7.4.7"
+    "astro": "^7.4.7",
+    "sharp": "^0.35.5"
   }
 }

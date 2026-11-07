@@ -37,8 +37,6 @@ tips:
   - Frozen blueberries work in a pinch. Fold them in while still frozen, and expect some purple streaks.
   - For a single batch of about 20 cookies, cut every amount in half.
   - If you make smaller cookies, check them a few minutes early.
-image: https://images.unsplash.com/photo-1558303420-f814d8a590f5
-imageAlt: Soft cookies studded with blueberries on a baking sheet
-photoCredit: Roberto Martinez
-photoCreditUrl: https://unsplash.com/@machinez
+image: /images/blueberry-lemon-white-chocolate-cookies.jpg
+imageAlt: Matt's blueberry lemon cookies, rolled in sugar, cooling on a wire rack
 ---

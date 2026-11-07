@@ -1,5 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { CATEGORIES, type Category } from './categories';
+// @ts-ignore plain JS module shared with scripts/photos.mjs
+import { PHOTO_SIZES, LOCAL_PREFIX, sizedPath } from './photo-sizes.mjs';
 
 export type Recipe = CollectionEntry<'recipes'>;
 type IngredientList = Recipe['data']['ingredients'];
@@ -80,13 +82,25 @@ const UNSPLASH = 'https://images.unsplash.com/';
  * image service (and must be loaded from there under their rules); local photos are used as-is.
  */
 export function photo(src: string, width: number, height: number): string {
+  if (src.startsWith(LOCAL_PREFIX)) return localPhoto(src, width, height);
   if (!src.startsWith(UNSPLASH)) return src;
   const base = src.split('?')[0];
   return `${base}?ixlib=rb-4.1.0&auto=format&fit=crop&crop=entropy&w=${width}&h=${height}&q=75`;
 }
 
+/** Our own photo (public/images/...) at a size made by scripts/photos.mjs. */
+function localPhoto(src: string, width: number, height: number): string {
+  if (!(PHOTO_SIZES as number[][]).some(([w, h]) => w === width && h === height)) {
+    throw new Error(`Photo size ${width}x${height} isn't in src/lib/photo-sizes.mjs. Add it there.`);
+  }
+  return sizedPath(src, width, height);
+}
+
 /** srcset for a photo at a fixed aspect ratio, e.g. 4/3 */
 export function photoSrcset(src: string, ratio: number, widths: number[]): string | undefined {
+  if (src.startsWith(LOCAL_PREFIX)) {
+    return widths.map((w) => `${localPhoto(src, w, Math.round(w / ratio))} ${w}w`).join(', ');
+  }
   if (!src.startsWith(UNSPLASH)) return undefined;
   return widths.map((w) => `${photo(src, w, Math.round(w / ratio))} ${w}w`).join(', ');
 }
