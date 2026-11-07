@@ -4,7 +4,7 @@ description: A fluffy, lightly sweet pancake batter made with plain milk and mel
 category: Breakfast
 prepMinutes: 10
 cookMinutes: 30
-servings: About 30 pancakes
+servings: About 30 pancakes, depending on size
 date: 2026-11-07
 tags: [weekend, kid-friendly, big-batch, vegetarian]
 ingredients:
