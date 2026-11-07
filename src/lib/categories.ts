@@ -1,5 +1,5 @@
 // The meals a recipe can be filed under. Add a new one here if you need it.
-export const CATEGORIES = ['Breakfast', 'Lunch', 'Dinner', 'Sides', 'Breads', 'Snacks', 'Dessert'] as const;
+export const CATEGORIES = ['Breakfast', 'Lunch', 'Dinner', 'Sides', 'Breads', 'Snacks', 'Dessert', 'Drinks', 'Basics'] as const;
 
 export type Category = (typeof CATEGORIES)[number];
 
@@ -12,4 +12,6 @@ export const CATEGORY_COLORS: Record<Category, string> = {
   Breads: 'var(--wheat)',
   Snacks: 'var(--mustard)',
   Dessert: 'var(--tomato)',
+  Drinks: 'var(--cobalt)',
+  Basics: 'var(--wheat)',
 };

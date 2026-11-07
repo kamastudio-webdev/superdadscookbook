@@ -12,8 +12,10 @@ The recipe website at superdadscookbook.com, built with [Astro](https://astro.bu
 | --- | --- |
 | `title` | Recipe name |
 | `description` | One or two sentences shown on recipe cards and in Google |
-| `category` | One of: Breakfast, Lunch, Dinner, Sides, Snacks, Dessert |
+| `category` | One of: Breakfast, Lunch, Dinner, Sides, Breads, Snacks, Dessert, Drinks, Basics (Basics = mixes, sauces and seasonings) |
 | `prepMinutes` / `cookMinutes` | Numbers only, like `15` |
+| `restMinutes` / `restLabel` | Optional waiting time, like `720` and `Rise` for an overnight rise. It's added to the total time |
+| `adaptedFrom` | Optional. For recipes based on another website: `{ name: Allrecipes, url: https://... }`. Shows an "Adapted from" link |
 | `servings` | Shown after "Makes", like `4 servings` or `12 muffins` |
 | `date` | The day you added it, like `2026-11-06` |
 | `tags` | Optional words in brackets, like `[kid-friendly, weeknight]` |

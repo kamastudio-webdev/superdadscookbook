@@ -27,6 +27,7 @@ steps:
 tips:
   - Plan ahead and make the dough the night before pizza night.
   - Two pieces make bigger, thicker crusts. Three make thinner ones.
+  - "Matt's toppings for one 16-inch large pizza: about 7 oz of sauce (a little over ¾ cup), 10 oz of shredded cheese (about 2½ cups), 5¼ oz of cooked sausage and 1¼ oz of pepperoni. For sauce, try the No-Cook Pizza Sauce."
   - "For a 1½ batch: 1500 g bread flour, 855 ml warm water, 12 g yeast, 1½ teaspoons sugar, 22 g salt and 45 g olive oil."
   - "No kitchen scale? The base batch is roughly 8 cups bread flour, 2⅓ cups water, 2½ teaspoons fine salt and 2 tablespoons olive oil. Weighing is more accurate."
 image: https://images.unsplash.com/photo-1513104890138-7c749659a591
