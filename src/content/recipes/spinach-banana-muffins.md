@@ -11,8 +11,8 @@ adaptedFrom:
   name: Yummy Toddler Food
   url: https://www.yummytoddlerfood.com/super-green-banana-spinach-muffins/
 ingredients:
-  - 2 cups sliced ripe banana (about 4 small or 2 medium-large bananas)
-  - 4 cups baby spinach, lightly packed
+  - 2 cups sliced ripe banana, about 300 g (4 small or 2 medium-large bananas)
+  - 4 cups baby spinach, lightly packed, about 120 g
   - 1½ cups milk (dairy, or unsweetened plain nondairy milk)
   - ½ cup honey
   - 4 tablespoons butter, melted and cooled (or neutral oil or plain yogurt)
@@ -33,6 +33,7 @@ steps:
   - Run a paring knife around any muffins that stick, then move them to a wire rack to cool. Serve warm, at room temperature or cold.
 tips:
   - Matt's copy is doubled. For 12 muffins, use half of everything (1 cup banana, 2 cups spinach, ¾ cup milk, ¼ cup honey, 2 tablespoons butter, 2 eggs, 1 teaspoon vanilla, 1 cup oats, 1 teaspoon baking soda, ⅛ teaspoon salt and 1 cup flour).
+  - Weighing is easiest. Matt figures about 150 g of sliced banana and 30 g of spinach per cup.
   - This is a lot of batter for one blender. If yours is smaller than a Vitamix, blend it in two batches.
   - Keep the muffins in the fridge, or freeze them and pull out a few at a time.
 image: https://images.unsplash.com/photo-1568369143307-508cfe8a2942
