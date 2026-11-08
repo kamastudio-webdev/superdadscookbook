@@ -51,7 +51,7 @@ image: /images/grilled-cheese.jpg
 imageAlt: Golden grilled cheese sandwich cut in half
 ```
 
-Any phone photo works, portrait or landscape. Before each build, `scripts/photos.mjs` cuts every photo in `public/images/` into the sizes the site uses (cards, the recipe banner, the home page and Google's square, 4:3 and 16:9 images), cropping toward the most interesting part of the picture. The sized copies go in `public/images/sized/` and aren't saved in git. The copies drop the phone's hidden data (like location), but the original file is public too, so strip it from the original before adding it. Google needs a photo before it will show a recipe with a picture in search results.
+Any phone photo works, portrait or landscape. Before each build, `scripts/photos.mjs` cuts every photo in `public/images/` into the sizes the site uses (cards, the recipe banner, the home page and Google's square, 4:3 and 16:9 images), cropping from the middle of the picture. If a crop cuts off the food, set where to crop that photo from in `PHOTO_FOCUS` in `src/lib/photo-sizes.mjs`. The sized copies go in `public/images/sized/` and aren't saved in git. The copies drop the phone's hidden data (like location), but the original file is public too, so strip it from the original before adding it. Google needs a photo before it will show a recipe with a picture in search results.
 
 If a page starts showing photos at a new size, add that size to `src/lib/photo-sizes.mjs`. The build stops with a message if a size is missing.
 

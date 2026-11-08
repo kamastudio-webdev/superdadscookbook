@@ -234,6 +234,32 @@ const breadcrumbs = {
         }
       </div>
     </div>
+
+    {
+      d.gallery.length > 0 && (
+        <section class="recipe-gallery" aria-labelledby="gallery-heading">
+          <h2 id="gallery-heading">More photos</h2>
+          <ul>
+            {d.gallery.map((g) => (
+              <li>
+                <a href={g.src}>
+                  <img
+                    src={photo(g.src, 640, 480)}
+                    srcset={photoSrcset(g.src, 4 / 3, [400, 640, 960])}
+                    sizes="(max-width: 700px) 50vw, 300px"
+                    width="640"
+                    height="480"
+                    alt={g.alt}
+                    loading="lazy"
+                  />
+                </a>
+                <p>{g.alt}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </article>
 
   {

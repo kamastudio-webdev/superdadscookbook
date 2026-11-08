@@ -13,6 +13,15 @@ export const PHOTO_SIZES = [
   [1200, 1200], [1200, 900], [1200, 675], [1200, 630],
 ];
 
+// Where to crop each photo from. Default is the middle of the picture.
+// To move the crop for one photo, add its file name with one of:
+// 'north' (top), 'south' (bottom), 'east' (right), 'west' (left),
+// 'northeast', 'northwest', 'southeast', 'southwest', or 'attention'
+// (let the computer guess the most interesting part).
+export const PHOTO_FOCUS = {
+  // 'example-photo.jpg': 'north',
+};
+
 export const LOCAL_PREFIX = '/images/';
 export const SIZED_DIR = 'sized';
 

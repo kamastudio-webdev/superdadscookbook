@@ -32,6 +32,8 @@ const recipes = defineCollection({
     // A photo in public/images/ (like /images/pancakes.jpg) or an Unsplash photo address.
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** Extra photos shown under the steps (Matt's own, in public/images/). */
+    gallery: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
     // Who took the photo, shown under it. Leave out for your own photos.
     photoCredit: z.string().optional(),
     photoCreditUrl: z.string().url().optional(),

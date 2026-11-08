@@ -27,11 +27,22 @@ steps:
 tips:
   - Plan ahead and make the dough the night before pizza night.
   - Two pieces make bigger, thicker crusts. Three make thinner ones.
+  - "Pizza night at our house: a cheese pizza, a pepperoni and Italian sausage, and a white pizza."
+  - "White pizza: skip the red sauce. Brush the stretched dough with olive oil and garlic, then top it with spinach, cooked Italian sausage, shredded cheese and spoonfuls of ricotta."
   - "Matt's toppings for one 16-inch large pizza: about 7 oz of sauce (a little over ¾ cup), 10 oz of shredded cheese (about 2½ cups), 5¼ oz of cooked sausage and 1¼ oz of pepperoni. For sauce, try the No-Cook Pizza Sauce."
   - "For a 1½ batch: 1500 g bread flour, 855 ml warm water, 12 g yeast, 1½ teaspoons sugar, 22 g salt and 45 g olive oil."
   - "No kitchen scale? The base batch is roughly 8 cups bread flour, 2⅓ cups water, 2½ teaspoons fine salt and 2 tablespoons olive oil. Weighing is more accurate."
-image: https://images.unsplash.com/photo-1513104890138-7c749659a591
-imageAlt: Sliced cheese pizza with cherry tomatoes and rosemary on a wooden board
-photoCredit: Ivan Torres
-photoCreditUrl: https://unsplash.com/@iavnt
+image: /images/pepperoni-sausage-pizza.jpg
+imageAlt: Matt's pepperoni and Italian sausage pizza on a cutting board
+gallery:
+  - src: /images/pizza-dough-risen.jpg
+    alt: "The dough after its rise, in an oiled bowl"
+  - src: /images/pizza-topped.jpg
+    alt: "Sauce and shredded cheese on, ready for the oven"
+  - src: /images/cheese-pizza.jpg
+    alt: "Cheese pizza, fresh out of the oven"
+  - src: /images/white-pizza.jpg
+    alt: "White pizza with spinach, Italian sausage and ricotta"
+  - src: /images/white-pizza-close.jpg
+    alt: "A closer look at the white pizza"
 ---

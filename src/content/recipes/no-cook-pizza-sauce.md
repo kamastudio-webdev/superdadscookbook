@@ -34,8 +34,9 @@ steps:
 tips:
   - "Matt's amounts for one 16-inch large pizza: about 7 oz of sauce (a little over ¾ cup), 10 oz of shredded cheese (about 2½ cups), 5¼ oz of cooked sausage and 1¼ oz of pepperoni."
   - One batch is enough for about 2 large pizzas. For 3, make 1½ batches.
-image: https://images.unsplash.com/photo-1472476443507-c7a5948772fc
-imageAlt: Jar of tomato sauce with fresh tomatoes
-photoCredit: Dennis Klein
-photoCreditUrl: https://unsplash.com/@klein3
+image: /images/cheese-pizza.jpg
+imageAlt: Matt's cheese pizza made with this sauce
+gallery:
+  - src: /images/pizza-topped.jpg
+    alt: "The sauce spread on the dough, with shredded cheese on top"
 ---

@@ -4,7 +4,7 @@
 import { readdir, mkdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
-import { PHOTO_SIZES, LOCAL_PREFIX, SIZED_DIR, sizedPath } from '../src/lib/photo-sizes.mjs';
+import { PHOTO_SIZES, PHOTO_FOCUS, LOCAL_PREFIX, SIZED_DIR, sizedPath } from '../src/lib/photo-sizes.mjs';
 
 const root = path.resolve(import.meta.dirname, '..', 'public');
 const imagesDir = path.join(root, 'images');
@@ -16,6 +16,13 @@ const files = (await readdir(imagesDir, { withFileTypes: true }).catch(() => [])
 
 await mkdir(outDir, { recursive: true });
 
+function focusFor(name) {
+  const f = PHOTO_FOCUS[name];
+  if (f === 'attention') return sharp.strategy.attention;
+  if (f === 'entropy') return sharp.strategy.entropy;
+  return f ?? 'centre';
+}
+
 let made = 0;
 for (const name of files) {
   const src = path.join(imagesDir, name);
@@ -26,7 +33,7 @@ for (const name of files) {
     if (done) continue;
     await sharp(src)
       .rotate() // respect the phone's orientation flag
-      .resize(w, h, { fit: 'cover', position: sharp.strategy.attention })
+      .resize(w, h, { fit: 'cover', position: focusFor(name) })
       .jpeg({ quality: 78, mozjpeg: true }) // metadata (like GPS) is dropped
       .toFile(out);
     made++;
