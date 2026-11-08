@@ -1,30 +1,32 @@
 ---
 title: Pizza Dough
-description: A big batch of stand-mixer pizza dough made with bread flour, cold water and olive oil. It rises overnight in the fridge and makes three 16-inch pizzas.
+description: A big batch of stand-mixer pizza dough made with bread flour, cold water and olive oil. It rests overnight in the fridge (longer for more flavor) and makes three 16-inch pizzas.
 category: Breads
-prepMinutes: 20
-cookMinutes: 15
+prepMinutes: 25
+cookMinutes: 20
 restMinutes: 720
 restLabel: Rise
 servings: 3 large 16-inch pizzas
 date: 2026-11-06
 tags: [pizza-night, make-ahead]
 ingredients:
-  - 853 g bread flour (about 6¾ cups)
   - 529 g cold water, about 40°F (about 2¼ cups)
   - 3.4 g active dry yeast (about 1 teaspoon)
-  - 17 g sugar (about 4 teaspoons)
+  - 853 g bread flour (about 6¾ cups), plus more for the counter
+  - 28 g olive oil (about 2 tablespoons), plus more for the containers
   - 21.5 g salt (about 3½ teaspoons)
-  - 28 g olive oil (about 2 tablespoons)
+  - 17 g sugar (about 4 teaspoons)
 steps:
-  - Stir the cold water, yeast and sugar together in the stand mixer bowl.
-  - Add the flour and salt and mix with the dough hook until there's no dry flour left.
-  - Add the olive oil and mix for 10 minutes on speed 3.
-  - Shape the dough into a ball and put it in a large oiled bowl or container. Cover it tightly and let it rise in the fridge overnight.
-  - About 1 to 2 hours before baking, take the dough out and divide it into 3 equal pieces, about 485 g each. Shape each piece into a ball, cover, and let them warm up on the counter so they stretch easily.
-  - Stretch each ball into a 16-inch pizza and add your toppings. Bake at 475°F to 500°F for about 10 to 15 minutes, until the crust is browned and the cheese is bubbling.
+  - Put the cold water, yeast, flour and olive oil in the stand mixer bowl. Mix with the dough hook on low for 12 minutes in all.
+  - After the first 4 minutes, add the salt and sugar, and keep mixing on low for the last 8 minutes.
+  - Flour the counter and turn the dough out. Divide it into 3 equal pieces, about 484 g each, and form each one into a tight ball.
+  - Oil 3 containers and put a dough ball in each. Cover them and refrigerate overnight, or longer for more flavor.
+  - When you're ready to make pizza, flour the counter. Start by pressing in an edge around a dough ball, then work the dough outward from the middle.
+  - Once it's as thin as you like, move it to a pizza screen and add your toppings.
+  - Bake at 500°F for 15 to 20 minutes, until the crust is browned and the cheese is bubbling. Repeat with the other dough balls.
 tips:
-  - Plan ahead and make the dough the night before pizza night.
+  - Plan ahead and make the dough the night before pizza night. The longer it sits in the fridge, the more flavor it gets.
+  - Matt stores his dough balls in 8-inch cake pans, but any container works. He's even used plastic bread bags.
   - "Pizza night at our house: a cheese pizza, a pepperoni and Italian sausage, and a white pizza."
   - "White pizza: skip the red sauce. Brush the stretched dough with olive oil and garlic, then top it with spinach, cooked Italian sausage, shredded cheese and spoonfuls of ricotta."
   - "Matt's toppings for one 16-inch large pizza: about 7 oz of sauce (a little over ¾ cup), 10 oz of shredded cheese (about 2½ cups), 5¼ oz of cooked sausage and 1¼ oz of pepperoni. For sauce, try the No-Cook Pizza Sauce."
