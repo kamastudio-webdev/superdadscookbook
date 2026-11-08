@@ -2,6 +2,7 @@
 title: Creamy Sun-Dried Tomato Chicken Pasta
 description: Seasoned chicken bites browned in sun-dried tomato oil, then stirred into pasta cooked right in the pan with a creamy garlic, lemon and Parmesan sauce and spinach.
 category: Dinner
+cuisine: Italian
 prepMinutes: 15
 cookMinutes: 30
 servings: 4 servings

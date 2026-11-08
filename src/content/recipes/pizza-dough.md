@@ -2,6 +2,7 @@
 title: Pizza Dough
 description: A big batch of stand-mixer pizza dough made with bread flour, cold water and olive oil. It rests overnight in the fridge (longer for more flavor) and makes three 16-inch pizzas.
 category: Breads
+cuisine: Italian
 prepMinutes: 25
 cookMinutes: 20
 restMinutes: 720

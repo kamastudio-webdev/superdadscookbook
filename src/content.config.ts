@@ -17,6 +17,8 @@ const recipes = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.enum(CATEGORIES),
+    /** Style of cooking, for Google (e.g. American, Italian, Mexican). */
+    cuisine: z.string().default('American'),
     prepMinutes: z.number().int().nonnegative(),
     cookMinutes: z.number().int().nonnegative(),
     /** Hands-off waiting time (rising, chilling). Counts toward the total. */

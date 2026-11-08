@@ -2,6 +2,7 @@
 title: Sheet-Pan Chicken Fajitas
 description: Everything roasts on one pan, so dinner takes about 15 minutes of hands-on time and there's only one pan to wash.
 category: Dinner
+cuisine: Tex-Mex
 prepMinutes: 15
 cookMinutes: 25
 servings: 4 servings

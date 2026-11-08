@@ -2,6 +2,7 @@
 title: Italian Sausage Bow Tie Pasta
 description: Bow tie pasta tossed in a creamy tomato sauce with crumbled Italian sausage, garlic and a handful of spinach. Restaurant-style comfort on a weeknight.
 category: Dinner
+cuisine: Italian
 prepMinutes: 15
 cookMinutes: 30
 servings: 4 to 6 servings

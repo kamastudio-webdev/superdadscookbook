@@ -2,6 +2,7 @@
 title: Tacos de Carnitas
 description: Pork shoulder simmered with orange zest, garlic and warm spices until tender, then fried in its own fat until crisp at the edges and piled into corn tortillas.
 category: Dinner
+cuisine: Mexican
 prepMinutes: 15
 cookMinutes: 135
 servings: 6 to 8 servings (24 tacos)

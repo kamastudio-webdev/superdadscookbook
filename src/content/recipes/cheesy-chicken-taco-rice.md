@@ -2,6 +2,7 @@
 title: Cheesy Chicken Taco Rice
 description: One-pot rice toasted in oil and simmered with Sazón, chicken bouillon and sauce, made into a cheesy chicken taco dinner.
 category: Dinner
+cuisine: Tex-Mex
 prepMinutes: 15
 cookMinutes: 25
 restMinutes: 15

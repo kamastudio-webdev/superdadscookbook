@@ -2,6 +2,7 @@
 title: Classic Chili
 description: A big pot of stovetop chili with ground beef, kidney beans and a homemade chili seasoning blend. This batch makes 12 servings.
 category: Dinner
+cuisine: Tex-Mex
 prepMinutes: 10
 cookMinutes: 40
 restMinutes: 10

@@ -2,6 +2,7 @@
 title: German Pancake
 description: A big oven pancake that puffs up tall and golden in a hot buttered pan. Seven eggs, a cup each of flour and milk, and 30 minutes in the oven.
 category: Breakfast
+cuisine: German
 prepMinutes: 10
 cookMinutes: 30
 servings: 6 servings

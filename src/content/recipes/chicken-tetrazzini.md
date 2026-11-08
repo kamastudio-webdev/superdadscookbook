@@ -2,6 +2,7 @@
 title: Chicken Tetrazzini
 description: Shredded chicken, golden mushrooms and linguine in a creamy, nutmeg-scented sauce, topped with Parmesan and breadcrumbs and baked until bubbling.
 category: Dinner
+cuisine: Italian
 prepMinutes: 35
 cookMinutes: 60
 servings: 6 to 8 servings

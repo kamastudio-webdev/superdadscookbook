@@ -2,6 +2,7 @@
 title: Cuban Sandwiches
 description: Citrus-and-cumin roast pork, ham, Swiss, pickles and mustard pressed inside buttered Cuban bread until golden and melty.
 category: Lunch
+cuisine: Cuban
 prepMinutes: 15
 cookMinutes: 40
 restMinutes: 30

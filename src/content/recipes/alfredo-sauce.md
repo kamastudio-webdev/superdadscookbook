@@ -2,6 +2,7 @@
 title: Alfredo Sauce
 description: A rich, garlicky homemade Alfredo made with milk and cream, thickened with a little flour and finished with Parmesan and Romano.
 category: Basics
+cuisine: Italian
 prepMinutes: 5
 cookMinutes: 15
 servings: About 3½ cups of sauce

@@ -48,6 +48,12 @@ const site = Astro.site;
 const servings = servingsNumber(recipe);
 const isUnsplash = d.image?.startsWith('https://images.unsplash.com/') ?? false;
 
+/** A name for a step, for Google: its first sentence (shortened only if very long). */
+function stepName(text: string): string {
+  const s = text.split(/(?<=[.!?])\s/)[0].replace(/[.!?]$/, '');
+  return s.length <= 100 ? s : s.slice(0, 100).replace(/\s+\S*$/, '') + '…';
+}
+
 // Structured data so Google can show this as a recipe result.
 // Google asks for the photo in square, 4:3 and 16:9 shapes.
 const schema = {
@@ -68,13 +74,19 @@ const schema = {
       }
     : {}),
   recipeCategory: d.category,
+  recipeCuisine: d.cuisine,
   recipeYield: servings ? [String(servings), d.servings] : d.servings,
   prepTime: isoDuration(d.prepMinutes),
   cookTime: isoDuration(d.cookMinutes),
   totalTime: isoDuration(total),
   keywords: d.tags.join(', '),
   recipeIngredient: flatIngredients(d.ingredients),
-  recipeInstructions: d.steps.map((text) => ({ '@type': 'HowToStep', text })),
+  recipeInstructions: d.steps.map((text, i) => ({
+    '@type': 'HowToStep',
+    name: stepName(text),
+    text,
+    url: `${url.href}#step-${i + 1}`,
+  })),
   ...(d.adaptedFrom ? { isBasedOn: d.adaptedFrom.url } : {}),
 };
 
@@ -193,8 +205,8 @@ const breadcrumbs = {
           <h2 id="steps-heading">Steps</h2>
           <ol class="step-list">
             {
-              d.steps.map((step) => (
-                <li>
+              d.steps.map((step, i) => (
+                <li id={`step-${i + 1}`}>
                   <p>{step}</p>
                 </li>
               ))

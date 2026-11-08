@@ -2,6 +2,7 @@
 title: World's Best Lasagna
 description: A big, hearty lasagna with a slow-simmered sausage and beef tomato sauce, a parsley ricotta layer, and plenty of mozzarella and Parmesan.
 category: Dinner
+cuisine: Italian
 prepMinutes: 30
 cookMinutes: 150
 restMinutes: 15

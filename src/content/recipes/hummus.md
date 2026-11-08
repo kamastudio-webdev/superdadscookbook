@@ -2,6 +2,7 @@
 title: Hummus
 description: Smooth, garlicky hummus with plenty of lemon, made from canned chickpeas in a few minutes. Good with chips, veggies or on a sandwich.
 category: Snacks
+cuisine: Middle Eastern
 prepMinutes: 10
 cookMinutes: 0
 servings: about 4 cups

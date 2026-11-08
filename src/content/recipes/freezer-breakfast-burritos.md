@@ -2,6 +2,7 @@
 title: Freezer Breakfast Burritos
 description: Make a batch on Sunday and grab-and-go breakfasts are covered for the week. Each one reheats in about 2 minutes.
 category: Breakfast
+cuisine: Tex-Mex
 prepMinutes: 20
 cookMinutes: 25
 servings: 10 burritos

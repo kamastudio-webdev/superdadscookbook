@@ -2,6 +2,7 @@
 title: No-Cook Pizza Sauce
 description: A sweet and savory pizza sauce stirred together from tomato paste, Parmesan, honey and dried herbs. No simmering, just a 30-minute rest.
 category: Basics
+cuisine: Italian
 prepMinutes: 10
 cookMinutes: 0
 restMinutes: 30

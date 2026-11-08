@@ -2,6 +2,7 @@
 title: Copycat Chipotle Cilantro Lime Rice
 description: Fluffy, non-sticky basmati rice cooked like pasta, then tossed with fresh cilantro and a mix of lime and lemon juice, just like the burrito bowl favorite.
 category: Sides
+cuisine: Mexican
 prepMinutes: 5
 cookMinutes: 20
 servings: 12 servings (about ½ cup each)

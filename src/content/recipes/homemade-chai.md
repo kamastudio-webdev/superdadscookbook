@@ -2,6 +2,7 @@
 title: Homemade Chai
 description: Black tea boiled hard with cinnamon sticks, cloves, cracked cardamom, peppercorns and ginger, then sweetened and strained.
 category: Drinks
+cuisine: Indian
 prepMinutes: 5
 cookMinutes: 15
 servings: About 2 cups

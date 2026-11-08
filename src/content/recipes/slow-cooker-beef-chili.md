@@ -2,6 +2,7 @@
 title: Slow Cooker Beef Chili
 description: Brown the beef in the morning, let the slow cooker do the rest, and dinner is ready when everyone gets home.
 category: Dinner
+cuisine: Tex-Mex
 prepMinutes: 20
 cookMinutes: 360
 servings: 8 servings
