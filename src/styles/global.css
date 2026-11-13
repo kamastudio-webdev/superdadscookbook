@@ -817,6 +817,92 @@ main {
   color: var(--ink-soft);
 }
 
+/* Batch-size buttons (½× to 4×) in the ingredients box */
+.scaler {
+  margin: 0.2rem 0 1rem;
+}
+
+.scaler[hidden],
+.scaler-note[hidden],
+.makes-batch[hidden],
+.print-scale[hidden] {
+  display: none;
+}
+
+.scaler-label {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+
+.scaler-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.scaler-buttons button {
+  font: inherit;
+  font-weight: 700;
+  min-width: 2.9rem;
+  min-height: 2.6rem;
+  padding: 0.35rem 0.55rem;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+}
+
+.scaler-buttons button:hover {
+  background: var(--mustard-pale);
+}
+
+.scaler-buttons button[aria-pressed='true'] {
+  background: var(--mustard);
+}
+
+.scaler-buttons button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.scaler-note {
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--mustard-pale);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  margin: 0.7rem 0 0;
+}
+
+.makes-batch {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.print-scale {
+  display: none;
+}
+
+@media print {
+  .scaler {
+    display: none !important;
+  }
+
+  .print-scale:not([hidden]) {
+    display: block;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+}
+
 .list-hint {
   font-size: var(--step--1);
   color: var(--ink-soft);

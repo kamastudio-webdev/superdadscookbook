@@ -128,7 +128,10 @@ const breadcrumbs = {
         <div><dt>Cook</dt><dd>{formatMinutes(d.cookMinutes)}</dd></div>
         {d.restMinutes > 0 && <div><dt>{d.restLabel}</dt><dd>{formatMinutes(d.restMinutes)}</dd></div>}
         <div><dt>Total</dt><dd>{formatMinutes(total)}</dd></div>
-        <div><dt>Makes</dt><dd>{d.servings}</dd></div>
+        <div>
+          <dt>Makes</dt>
+          <dd><span data-makes>{d.servings}</span><span class="makes-batch" data-makes-batch hidden></span></dd>
+        </div>
       </dl>
 
       <div class="recipe-tools">
@@ -180,6 +183,29 @@ const breadcrumbs = {
     <div class="recipe-layout">
       <section class="ingredients" aria-labelledby="ingredients-heading">
         <h2 id="ingredients-heading">Ingredients</h2>
+        <div class="scaler" data-scaler hidden>
+          <span class="scaler-label" id="scaler-label">Batch size</span>
+          <div class="scaler-buttons" role="group" aria-labelledby="scaler-label">
+            {
+              [
+                ['0.5', '½×', 'Half batch'],
+                ['1', '1×', 'Regular batch'],
+                ['2', '2×', 'Double batch'],
+                ['3', '3×', 'Triple batch'],
+                ['4', '4×', 'Four times the batch'],
+              ].map(([value, label, title]) => (
+                <button type="button" data-scale={value} aria-pressed={value === '1' ? 'true' : 'false'} aria-label={title}>
+                  {label}
+                </button>
+              ))
+            }
+          </div>
+          <p class="scaler-note" data-scaler-note hidden>
+            Amounts in the steps are still for 1×. A bigger or smaller batch may need a different pan size and cooking
+            time.
+          </p>
+        </div>
+        <p class="print-scale" data-print-scale hidden></p>
         {
           groupIngredients(d.ingredients).map((group) => (
             <>
@@ -189,7 +215,7 @@ const breadcrumbs = {
                   <li>
                     <label>
                       <input type="checkbox" />
-                      <span>{line}</span>
+                      <span data-ing>{line}</span>
                     </label>
                   </li>
                 ))}
@@ -287,6 +313,41 @@ const breadcrumbs = {
 </Base>
 
 <script>
+  // @ts-ignore: plain JavaScript module shared with the Node test script
+  import { scaleLine, scaleMakes } from '../../lib/scale-amounts.mjs';
+
+  // Batch-size buttons: ½×, 1×, 2×, 3×, 4× multiply the ingredient amounts and "Makes".
+  const scaler = document.querySelector<HTMLElement>('[data-scaler]');
+  if (scaler) {
+    const lines = [...document.querySelectorAll<HTMLElement>('[data-ing]')].map((el) => ({ el, text: el.textContent ?? '' }));
+    const makes = document.querySelector<HTMLElement>('[data-makes]');
+    const makesText = makes?.textContent ?? '';
+    const makesBatch = document.querySelector<HTMLElement>('[data-makes-batch]');
+    const note = scaler.querySelector<HTMLElement>('[data-scaler-note]');
+    const printNote = document.querySelector<HTMLElement>('[data-print-scale]');
+    const buttons = [...scaler.querySelectorAll<HTMLButtonElement>('[data-scale]')];
+
+    const apply = (factor: number, label: string) => {
+      for (const { el, text } of lines) el.textContent = scaleLine(text, factor);
+      if (makes) makes.textContent = scaleMakes(makesText, factor) ?? makesText;
+      if (makesBatch) {
+        makesBatch.hidden = factor === 1;
+        makesBatch.textContent = `${label} recipe`;
+      }
+      if (note) note.hidden = factor === 1;
+      if (printNote) {
+        printNote.hidden = factor === 1;
+        printNote.textContent = `Amounts shown for a ${label} batch.`;
+      }
+      for (const b of buttons) b.setAttribute('aria-pressed', String(Number(b.dataset.scale) === factor));
+    };
+
+    for (const b of buttons) {
+      b.addEventListener('click', () => apply(Number(b.dataset.scale), b.textContent?.trim() ?? ''));
+    }
+    scaler.hidden = false;
+  }
+
   // Print button
   document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 

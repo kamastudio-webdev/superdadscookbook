@@ -64,6 +64,17 @@ photoCreditUrl: https://unsplash.com/@thomascpark
 
 When you swap in your own photo, delete those two lines.
 
+## Batch-size buttons
+
+Every recipe page has ½×, 1×, 2×, 3× and 4× buttons above the ingredients. They multiply the
+amounts in the ingredient list and the "Makes" line, and switch to easier kitchen measures where
+it helps (4 tablespoons becomes ¼ cup, ⅞ cup becomes ¾ cup plus 2 tablespoons). Amounts in the
+steps stay at 1×, and the page says so. Nothing in the recipe files needs to change: write
+ingredients the usual way, starting with the amount ("1½ cups milk", "2 large eggs").
+
+The scaling rules live in `src/lib/scale-amounts.mjs`. After changing them, run
+`node scripts/test-scale.mjs` (add `--all` to print every recipe at 2× and ½×).
+
 ## Work on the site on your own computer (optional)
 
 You need [Node.js](https://nodejs.org) version 22 or newer.
