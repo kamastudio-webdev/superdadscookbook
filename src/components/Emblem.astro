@@ -1,0 +1,66 @@
+---
+/**
+ * The Super Dad emblem: a flying spatula wearing a red cape, on a yellow badge.
+ *  - "full"   big version for the home page, with halftone dots, sparkles and spatula slots
+ *  - "simple" small version for the header and footer (thicker lines, fewer details)
+ * The same drawing is used for the browser-tab icon and phone icons in /public.
+ */
+interface Props {
+  variant?: 'full' | 'simple';
+  /** Give a label when the emblem is the only thing that names the link or page. */
+  label?: string;
+  class?: string;
+}
+
+const { variant = 'simple', label, class: className } = Astro.props;
+const full = variant === 'full';
+const s = full ? { ring: 5, cape: 3, blade: 4, handle: 3 } : { ring: 6, cape: 4, blade: 5, handle: 4 };
+const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' as const };
+const dotsId = 'emblem-dots';
+---
+
+<svg class:list={['emblem', className]} viewBox="0 0 120 120" width="120" height="120" focusable="false" {...a11y}>
+  {
+    full && (
+      <defs>
+        <pattern id={dotsId} width="6" height="6" patternUnits="userSpaceOnUse">
+          <circle cx="3" cy="3" r="1.3" fill="#F2A900" />
+        </pattern>
+      </defs>
+    )
+  }
+  <circle cx="60" cy="60" r="54" fill="#FFC928" stroke="#141833" stroke-width={s.ring} />
+  {
+    full && (
+      <>
+        <circle cx="60" cy="60" r="49" fill={`url(#${dotsId})`} />
+        <path
+          d="M30 22 Q30 30 38 30 Q30 30 30 38 Q30 30 22 30 Q30 30 30 22 Z"
+          fill="#FFFFFF"
+          stroke="#141833"
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M94 80 Q94 86 100 86 Q94 86 94 92 Q94 86 88 86 Q94 86 94 80 Z"
+          fill="#FFFFFF"
+          stroke="#141833"
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+      </>
+    )
+  }
+  <g transform="rotate(35 60 60)">
+    <path
+      d="M54 52 C 40 58, 30 70, 26 92 C 38 86, 46 88, 56 80 C 52 72, 52 62, 54 52 Z"
+      fill="#E43A2F"
+      stroke="#141833"
+      stroke-width={s.cape}
+      stroke-linejoin="round"
+    />
+    <rect x="44" y="18" width="32" height="34" rx="6" fill="#FFFFFF" stroke="#141833" stroke-width={s.blade} />
+    {full && <path d="M53 25 V44 M60 25 V44 M67 25 V44" stroke="#141833" stroke-width="3" stroke-linecap="round" />}
+    <rect x="56" y="50" width="8" height="52" rx="4" fill="#1E3FBF" stroke="#141833" stroke-width={s.handle} />
+  </g>
+</svg>

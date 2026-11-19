@@ -90,6 +90,21 @@ ingredients the usual way, starting with the amount ("1½ cups milk", "2 large e
 The scaling rules live in `src/lib/scale-amounts.mjs`. After changing them, run
 `node scripts/test-scale.mjs` (add `--all` to print every recipe at 2× and ½×).
 
+## The look: logo, colors and fonts
+
+The site uses the "Comic Hero" look: thick dark outlines, hard drop shadows and halftone dots.
+
+- **Logo:** a flying spatula wearing a red cape, on a yellow badge. It is drawn in
+  `src/components/Emblem.astro` (a big version for the home page, a simple one for the header and footer).
+- **Colors** (set at the top of `src/styles/global.css`): Hero Blue `#1E3FBF`, Cape Red `#E43A2F`,
+  Power Yellow `#FFC928`, Night Ink `#141833`, Sky `#EAF0FF`.
+- **Fonts:** Bangers for the logo and titles, Atkinson Hyperlegible Next for everything else.
+- **Browser-tab and phone icons:** made from the logo by `node scripts/icons.mjs`, which writes
+  `favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png` and `icon-512.png` into `public/`.
+  Run it again only if the logo changes.
+- **Share picture** (`public/og-image.png`, 1200×630): shown when someone shares the home page or
+  another page without its own photo. Recipe pages use the recipe photo instead.
+
 ## Work on the site on your own computer (optional)
 
 You need [Node.js](https://nodejs.org) version 22 or newer.

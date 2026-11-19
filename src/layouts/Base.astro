@@ -1,8 +1,11 @@
 ---
-import '@fontsource/bowlby-one/400.css';
+import '@fontsource/bangers/400.css';
 import '@fontsource/atkinson-hyperlegible-next/400.css';
 import '@fontsource/atkinson-hyperlegible-next/700.css';
 import '../styles/global.css';
+import Emblem from '../components/Emblem.astro';
+// The logo font, loaded early so the header doesn't jump when it arrives
+import bangersFont from '@fontsource/bangers/files/bangers-latin-400-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -36,12 +39,13 @@ const year = new Date().getFullYear();
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="preload" href={bangersFont} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#2747d8" />
+    <meta name="theme-color" content="#1E3FBF" />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title ?? SITE_NAME} />
     <meta property="og:description" content={description} />
@@ -58,10 +62,13 @@ const year = new Date().getFullYear();
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap header-inner">
-        <a class="logo" href="/">{SITE_NAME}</a>
+        <a class="logo" href="/">
+          <Emblem />
+          <span class="logo-text">Super Dad’s <span>Cookbook</span></span>
+        </a>
         <nav class="site-nav" aria-label="Main">
           <ul>
-            <li><a href="/recipes/" aria-current={path.startsWith('/recipes') ? 'page' : undefined}>Recipes</a></li>
+            <li><a class="nav-cta" href="/recipes/" aria-current={path.startsWith('/recipes') ? 'page' : undefined}>Recipes</a></li>
             <li><a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a></li>
           </ul>
         </nav>
@@ -75,7 +82,7 @@ const year = new Date().getFullYear();
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div>
-          <p class="footer-logo">{SITE_NAME}</p>
+          <p class="footer-logo"><Emblem /><span>Super Dad’s Cookbook</span></p>
           <p>Family recipes written for real kitchens.</p>
           <p class="small">© {year} {SITE_NAME}</p>
           <p class="small credit">Website design and development by <a href="https://kamastudio.com">KamaStudio</a></p>

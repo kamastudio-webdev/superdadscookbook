@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Emblem from '../components/Emblem.astro';
 import MealLinks from '../components/MealLinks.astro';
 import RecipeGrid from '../components/RecipeGrid.astro';
 import {
@@ -27,10 +28,13 @@ const website = {
 
 <Base>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(website)} />
-  <div class="wrap">
-    <section class="hero" aria-labelledby="site-title">
+  <section class="hero" aria-labelledby="site-title">
+    <div class="wrap hero-inner">
       <div class="hero-copy">
-        <h1 class="wordmark" id="site-title"><span>Super Dad’s</span> <span>Cookbook</span></h1>
+        <div class="hero-brand">
+          <Emblem variant="full" class="hero-emblem" />
+          <h1 class="wordmark" id="site-title"><span class="wordmark-top">Super Dad’s</span> <span class="wordmark-box">Cookbook</span></h1>
+        </div>
         <p class="hero-lede">
           Weeknight dinners, weekend pancakes and make-ahead breakfasts, written so anyone in the house can cook them.
         </p>
@@ -49,28 +53,32 @@ const website = {
                   class="pick-photo"
                   src={photo(pick.data.image, 720, 405)}
                   srcset={photoSrcset(pick.data.image, 16 / 9, [480, 720, 1080])}
-                  sizes="(max-width: 860px) 100vw, 480px"
+                  sizes="(max-width: 860px) 100vw, 440px"
                   width="720"
                   height="405"
                   alt=""
                   fetchpriority="high"
                 />
               )}
-              <h2 id="pick-heading">Try this one tonight</h2>
-              <p class="pick-title">
-                <a href={recipePath(pick)}>{pick.data.title}</a>
-              </p>
-              <p>{pick.data.description}</p>
-              <dl class="facts">
-                <div><dt>Time</dt><dd>{formatMinutes(totalMinutes(pick))}</dd></div>
-                <div><dt>Makes</dt><dd>{pick.data.servings}</dd></div>
-              </dl>
+              <h2 class="pick-tag" id="pick-heading">Try this one tonight!</h2>
+              <div class="pick-body">
+                <p class="pick-title">
+                  <a href={recipePath(pick)}>{pick.data.title}</a>
+                </p>
+                <p class="pick-desc">{pick.data.description}</p>
+                <dl class="facts">
+                  <div><dt>Time</dt><dd>{formatMinutes(totalMinutes(pick))}</dd></div>
+                  <div><dt>Makes</dt><dd>{pick.data.servings}</dd></div>
+                </dl>
+              </div>
             </div>
           </aside>
         )
       }
-    </section>
+    </div>
+  </section>
 
+  <div class="wrap">
     <section class="section" aria-labelledby="meals-heading">
       <div class="section-head">
         <h2 id="meals-heading">Cook by meal</h2>

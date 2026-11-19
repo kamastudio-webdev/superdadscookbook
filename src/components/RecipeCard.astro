@@ -1,5 +1,4 @@
 ---
-import { CATEGORY_COLORS } from '../lib/categories';
 import { formatMinutes, photo, photoSrcset, recipePath, totalMinutes, type Recipe } from '../lib/recipes';
 
 interface Props {
@@ -12,7 +11,7 @@ const d = recipe.data;
 const Heading = `h${level}` as 'h2' | 'h3';
 ---
 
-<article class="card" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
+<article class="card">
   {
     d.image && (
       <img
@@ -30,9 +29,9 @@ const Heading = `h${level}` as 'h2' | 'h3';
   }
   <div class="card-body">
     <Heading class="card-title"><a href={recipePath(recipe)}>{d.title}</a></Heading>
+    <span class="card-tag">{d.category}</span>
     <p class="card-desc">{d.description}</p>
     <dl class="facts">
-      <div><dt>Meal</dt><dd>{d.category}</dd></div>
       <div><dt>Time</dt><dd>{formatMinutes(totalMinutes(recipe))}</dd></div>
       <div><dt>Makes</dt><dd>{d.servings}</dd></div>
     </dl>

@@ -2,7 +2,6 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import RecipeGrid from '../../components/RecipeGrid.astro';
-import { CATEGORY_COLORS } from '../../lib/categories';
 import {
   absolutePhoto,
   categoryPath,
@@ -125,7 +124,7 @@ const breadcrumbs = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbs)} />
 
-  <article class="wrap" style={`--meal-color: ${CATEGORY_COLORS[d.category]}`}>
+  <article class="wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
         <li><a href="/recipes/">Recipes</a></li>
@@ -208,7 +207,7 @@ const breadcrumbs = {
                 ['3', '3×', 'Triple batch'],
                 ['4', '4×', 'Four times the batch'],
               ].map(([value, label, title]) => (
-                <button type="button" data-scale={value} aria-pressed={value === '1' ? 'true' : 'false'} aria-label={title}>
+                <button type="button" data-scale={value} aria-pressed={value === '1' ? 'true' : 'false'} aria-label={`${label}, ${title.toLowerCase()}`}>
                   {label}
                 </button>
               ))
