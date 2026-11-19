@@ -23,12 +23,24 @@ import {
 
 export async function getStaticPaths() {
   const recipes = await getRecipes();
+  const bySlug = new Map(recipes.map((r) => [r.id, r]));
+  // A "uses" link must point at a published recipe, or the build stops with a clear message.
+  for (const r of recipes) {
+    for (const u of r.data.uses) {
+      if (!bySlug.has(u.recipe)) throw new Error(`${r.id} uses "${u.recipe}", which isn't a published recipe.`);
+    }
+  }
   return recipes.map((recipe) => {
+    const uses = recipe.data.uses.map((u) => ({ recipe: bySlug.get(u.recipe)!, note: u.note }));
+    const usedBy = recipes.filter((o) => o.data.uses.some((u) => u.recipe === recipe.id));
+    const linked = [...uses.map((u) => u.recipe), ...usedBy];
     const sameMeal = recipes.filter((o) => o.id !== recipe.id && o.data.category === recipe.data.category);
     const others = recipes.filter((o) => o.id !== recipe.id && o.data.category !== recipe.data.category);
+    // Linked recipes come first in "More recipes"
+    const related = [...new Set([...linked, ...sameMeal, ...others])].slice(0, 3);
     return {
       params: { slug: recipe.id },
-      props: { recipe, related: [...sameMeal, ...others].slice(0, 3) },
+      props: { recipe, related, uses, usedBy },
     };
   });
 }
@@ -36,9 +48,11 @@ export async function getStaticPaths() {
 interface Props {
   recipe: Recipe;
   related: Recipe[];
+  uses: { recipe: Recipe; note?: string }[];
+  usedBy: Recipe[];
 }
 
-const { recipe, related } = Astro.props;
+const { recipe, related, uses, usedBy } = Astro.props;
 const d = recipe.data;
 const { Content } = await render(recipe);
 const hasStory = Boolean(recipe.body?.trim());
@@ -207,6 +221,18 @@ const breadcrumbs = {
         </div>
         <p class="print-scale" data-print-scale hidden></p>
         {
+          uses.length > 0 && (
+            <div class="recipe-link-box">
+              {uses.map(({ recipe: r, note }) => (
+                <p>
+                  <span class="recipe-link-label">Make first:</span> <a href={recipePath(r)}>{r.data.title}</a>
+                  {note && <span class="recipe-link-note"> {note}</span>}
+                </p>
+              ))}
+            </div>
+          )
+        }
+        {
           groupIngredients(d.ingredients).map((group) => (
             <>
               {group.section && <h3>{group.section}</h3>}
@@ -239,6 +265,22 @@ const breadcrumbs = {
             }
           </ol>
         </section>
+
+        {
+          usedBy.length > 0 && (
+            <div class="recipe-link-box recipe-link-box--after">
+              <p>
+                <span class="recipe-link-label">Use it to make:</span>{' '}
+                {usedBy.map((r, i) => (
+                  <>
+                    {i > 0 && ', '}
+                    <a href={recipePath(r)}>{r.data.title}</a>
+                  </>
+                ))}
+              </p>
+            </div>
+          )
+        }
 
         {
           d.tips.length > 0 && (

@@ -64,6 +64,21 @@ photoCreditUrl: https://unsplash.com/@thomascpark
 
 When you swap in your own photo, delete those two lines.
 
+## Link one recipe to another
+
+When a recipe is made with another recipe on the site (a dough, a sauce, a spice mix), add a
+`uses` line so readers can jump between them:
+
+```yaml
+uses:
+  - recipe: simple-burger-buns   # the other recipe's file name, without .md
+    note: Make the dough through its 1-hour rise.   # optional
+```
+
+The recipe shows a "Make first" box at the top of its ingredients, and the other recipe shows
+"Use it to make" with a link back, automatically. The build stops with a clear message if the
+file name is wrong or that recipe is still a draft.
+
 ## Batch-size buttons
 
 Every recipe page has ½×, 1×, 2×, 3× and 4× buttons above the ingredients. They multiply the

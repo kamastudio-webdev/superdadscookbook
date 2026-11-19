@@ -41,6 +41,9 @@ const recipes = defineCollection({
     photoCreditUrl: z.string().url().optional(),
     // For recipes based on someone else's: shown as "Adapted from <name>" with a link.
     adaptedFrom: z.object({ name: z.string(), url: z.string().url() }).optional(),
+    // Other recipes on the site this one is made with, like a dough or a sauce. Each shows as a
+    // "Make first" link at the top of the ingredients, and the other recipe links back automatically.
+    uses: z.array(z.object({ recipe: z.string(), note: z.string().optional() })).default([]),
     // Optional: number of servings for Google, if "servings" doesn't start with a number.
     servingsCount: z.number().int().positive().optional(),
     draft: z.boolean().default(false),

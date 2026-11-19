@@ -964,6 +964,45 @@ main {
   margin-bottom: 0.6rem;
 }
 
+/* Links between recipes that are made together ("Make first" / "Use it to make") */
+.recipe-link-box {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--mustard-pale);
+  padding: 0.7rem 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.recipe-link-box p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.recipe-link-box p + p {
+  margin-top: 0.4rem;
+}
+
+.recipe-link-box--after {
+  max-width: 62ch;
+  margin: 0 0 1.5rem;
+}
+
+.recipe-link-label {
+  font-weight: 700;
+}
+
+.recipe-link-box a {
+  font-weight: 700;
+  color: var(--cobalt);
+}
+
+.recipe-link-note {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+}
+
 .source {
   margin: 1.75rem 0 0;
   font-size: var(--step--1);
