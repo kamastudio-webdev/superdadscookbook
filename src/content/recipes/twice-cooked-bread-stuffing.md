@@ -1,15 +1,12 @@
 ---
 title: Twice-Cooked Bread Stuffing
-description: A big pan of Thanksgiving bread stuffing that's cooked twice. Cubed white bread, celery and onions are browned in butter on the stove, then baked until crisp on top. George Washington's Golden Seasoning flavors the whole batch, and you can make it the night before.
+description: Our family's Thanksgiving bread stuffing, cooked twice. Cubed white bread, celery and onions are browned in butter on the stove, then baked until crisp on top. George Washington's Golden Seasoning flavors the whole batch, and you can make it the night before.
 category: Sides
 prepMinutes: 30
 cookMinutes: 50
 servings: 5 to 6 people
 date: 2026-11-26
 tags: [stuffing, thanksgiving, holiday, make-ahead]
-adaptedFrom:
-  name: ManMadeDIY
-  url: https://www.manmadediy.com/best-turkey-stuffing-recipe-ever/
 ingredients:
   - 3 loaves white bread, cut into ¾- to 1-inch cubes
   - 12 stalks celery, chopped
@@ -31,9 +28,9 @@ steps:
 tips:
   - Cooking the stuffing twice is the point of this recipe. Browning it in butter on the stove gives it crisp, buttery edges, and the oven finishes it with a crunchy top while the inside stays soft.
   - Any oven temperature from 350°F to 400°F works, so the stuffing can go in alongside the turkey or whatever else is baking.
-  - The original recipe just says "lots of butter" for browning the stuffing. A stick is a starting point for 3 loaves; use more if the pan looks dry.
+  - Don't be shy with the butter when browning. A stick is a starting point for 3 loaves; use more if the pan looks dry.
   - George Washington's Golden Seasoning and Broth comes in small packets, usually in a box near the bouillon. A box holds 8 packets; this recipe uses 6. If you can't find it, chicken bouillon dissolved in the warm water will work, though the flavor will be different.
-  - The gizzards are optional, but the original recipe recommends them. Chop them finely so they cook through with the onions.
+  - The gizzards are optional. If you use them, chop them finely so they cook through with the onions.
   - Serve it with gravy. For 10 to 12 people, use the 2× button and make a double batch.
 image: /images/stuffing-browned-pan.jpg
 imageAlt: "Matt's stuffing, browned in butter and piled into a foil pan"
